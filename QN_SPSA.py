@@ -76,11 +76,10 @@ def fidelity_opt(params, params_pert=None):
 def cost_opt(params):
     return 1.0 - fidelity_opt(params)
 
-np.random.seed()
 initial_params = np.random.uniform(0, np.pi, NUM_PARAMS) 
 print(f"\n▶ Iniciando otimização com {NUM_PARAMS} parâmetros (2 qubits)...")
 
-opt = QNSPSA(fidelity=fidelity_opt, maxiter=80, blocking=True, allowed_increase=0.1)
+opt = QNSPSA(fidelity=fidelity_opt, maxiter=100, blocking=True, allowed_increase=0.1)
 result = opt.minimize(cost_opt, initial_params)
 best_params = result.x
 best_fidelity = fidelity_opt(best_params)
